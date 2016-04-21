@@ -6009,6 +6009,12 @@ public class SqlParserTest {
                 + "(VALUES (ROW(1, (CURRENT VALUE FOR `MY_SEQ`))))");
   }
 
+  @Test public void testTranslate3() {
+    checkExp(
+        "translate('aaabbbccc', 'ab', '+-')",
+        "TRANSLATE('aaabbbccc', 'ab', '+-')");
+  }
+
   //~ Inner Interfaces -------------------------------------------------------
 
   /**

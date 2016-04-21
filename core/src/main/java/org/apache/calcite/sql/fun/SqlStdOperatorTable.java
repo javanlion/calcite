@@ -1093,8 +1093,15 @@ public class SqlStdOperatorTable extends ReflectiveSqlOperatorTable {
   public static final SqlFunction CONVERT =
       new SqlConvertFunction("CONVERT");
 
-  public static final SqlFunction TRANSLATE =
-      new SqlConvertFunction("TRANSLATE");
+  /**
+   * The <code>TRANSLATE(<i>char_value</i> USING <i>translation_name</i>)</code> function
+   * alters the character set of a string value from one base character set to another.
+   *
+   * The <code>TRANSLATE(<i>string_expr</i>, <i>from_string</i>, <i>to_string</i>)</code> function
+   * returns <i>string_expr</i> with all occurrences of each character in
+   * <i>from_string</i> replaced by its corresponding character in <i>to_string</i>.
+   */
+  public static final SqlFunction TRANSLATE = new SqlTranslateFunction();
 
   public static final SqlFunction OVERLAY = new SqlOverlayFunction();
 

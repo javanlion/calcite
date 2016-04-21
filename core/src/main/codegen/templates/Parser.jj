@@ -4022,11 +4022,18 @@ SqlNode BuiltinFunctionCall() :
         {
             args = startList(e);
         }
-        <USING> name = Identifier()
-        {
-            namePos = getPos();
-            args.add(new SqlIdentifier(name, namePos));
-        }
+        (
+            <USING> name = Identifier()
+            {
+                namePos = getPos();
+                args.add(new SqlIdentifier(name, namePos));
+            }
+            |
+            <COMMA>
+            e = Expression(ExprContext.ACCEPT_SUBQUERY) { args.add(e); }
+            <COMMA>
+            e = Expression(ExprContext.ACCEPT_SUBQUERY) { args.add(e); }
+        )
         <RPAREN>
         {
             return SqlStdOperatorTable.TRANSLATE.createCall(
